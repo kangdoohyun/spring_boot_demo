@@ -22,20 +22,15 @@ public class UsrArticleController {
 	}
 	
 	private void makeTestDate() {
-		for(int i = 1; i <= 10; i++) {
-			Article article = new Article(i, "제목" + i);
-			articles.add(article);
-			lastId = i;
+		for(int i = 0; i < 10; i++) {
+			writeArticle("제목" + (i + 1));
 		}
 	}
 
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public Article doAdd(String title) {
-		int id = ++lastId;
-		Article article = new Article(id, title);
-		
-		articles.add(article);
+		Article article = writeArticle(title);
 		
 		return article;
 	}
@@ -72,6 +67,15 @@ public class UsrArticleController {
 		article.setTitle(title);
 		
 		return id + "번 게시물이 수정되었습니다.";
+	}
+	
+	public Article writeArticle(String title) {
+		int id = ++lastId;
+		Article article = new Article(id , title);
+		articles.add(article);
+		lastId = id;
+		
+		return article;
 	}
 	
 	private Article getArticleById(int id) {
