@@ -63,6 +63,18 @@ public class UsrArticleController {
 		return id + "번 게시물이 수정되었습니다.";
 	}
 	
+	@RequestMapping("/usr/article/detail")
+	@ResponseBody
+	public Object showDetail(int id) {
+		Article article = getArticleById(id);
+		
+		if(article == null) {
+			return "존재하지 않는 게시물입니다.";
+		}
+		
+		return article;
+	}
+	
 	private void makeTestDate() {
 		for(int i = 0; i < 10; i++) {
 			writeArticle("제목" + (i + 1));
