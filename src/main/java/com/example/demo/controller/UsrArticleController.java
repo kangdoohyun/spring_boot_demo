@@ -20,12 +20,6 @@ public class UsrArticleController {
 		
 		makeTestDate();
 	}
-	
-	private void makeTestDate() {
-		for(int i = 0; i < 10; i++) {
-			writeArticle("제목" + (i + 1));
-		}
-	}
 
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
@@ -50,23 +44,29 @@ public class UsrArticleController {
 			return "존재하지 않는 게시물입니다.";
 		}
 		
-		articles.remove(article);
+		deleteArticle(article);
 		
-		return id + "번 게시물이 삭제되었습니다.";
+		return id +  "번 게시물을 삭제하였습니다.";
 	}
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public String doModify(int id, String title) {
 		Article article = getArticleById(id);
-		
+
 		if(article == null) {
 			return "존재하지 않는 게시물입니다.";
 		}
 		
-		article.setTitle(title);
+		modiftArticle(article, title);
 		
 		return id + "번 게시물이 수정되었습니다.";
+	}
+	
+	private void makeTestDate() {
+		for(int i = 0; i < 10; i++) {
+			writeArticle("제목" + (i + 1));
+		}
 	}
 	
 	public Article writeArticle(String title) {
@@ -78,6 +78,14 @@ public class UsrArticleController {
 		return article;
 	}
 	
+	public void deleteArticle(Article article) {
+		articles.remove(article);
+	}
+	
+	public void modiftArticle(Article article, String title) {
+		article.setTitle(title);
+	}
+		
 	private Article getArticleById(int id) {
 		for (Article article : articles) {
 			if (article.getId() == id) {
