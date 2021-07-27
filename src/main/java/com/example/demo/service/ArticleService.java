@@ -10,19 +10,9 @@ import com.example.demo.repository.ArticleRepository;
 
 @Service
 public class ArticleService {
+	@Autowired
 	private ArticleRepository articleRepository;
-	
-	public ArticleService(ArticleRepository articleRepository) {
-		this.articleRepository = articleRepository;
-		makeTestDate();
-	}
-	
-	private void makeTestDate() {
-		for(int i = 0; i < 10; i++) {
-			writeArticle("제목" + (i + 1));
-		}
-	}
-	
+		
 	public List<Article> getArticles() {
 		return articleRepository.getArticles();
 	}
@@ -38,7 +28,7 @@ public class ArticleService {
 	public void modiftArticle(Article article, String title) {
 		articleRepository.modiftArticle(article, title);
 	}
-		
+	
 	public Article getArticleById(int id) {
 		return articleRepository.getArticleById(id);
 	}
