@@ -1,6 +1,10 @@
 server: 
   port: 8010
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/spring_boot_demo?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull

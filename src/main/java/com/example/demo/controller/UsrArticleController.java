@@ -1,10 +1,10 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
@@ -15,9 +15,9 @@ public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
 	
-	@RequestMapping("/usr/article/doAdd")
+	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public Article doAdd(String title, String body) {
+	public Article doWrite(String title, String body) {
 		int id = articleService.writeArticle(title, body);
 		
 		Article article = articleService.getArticleById(id);
@@ -25,9 +25,9 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/list")
-	@ResponseBody
-	public List<Article> getArticles() {
-		return articleService.getArticles();
+	public String showList(Model model) {
+		model.addAttribute("articles", articleService.getArticles());
+		return "usr/article/list";
 	}
 	
 	@RequestMapping("/usr/article/doDelete")
@@ -44,7 +44,7 @@ public class UsrArticleController {
 		return id +  "번 게시물을 삭제하였습니다.";
 	}
 
-	@RequestMapping("/usr/article/doModify")
+	@RequestMapping(value = "/usr/article/doModify", method = RequestMethod.GET)
 	@ResponseBody
 	public String doModify(int id, String title, String body) {
 		Article article = articleService.getArticleById(id);
@@ -59,15 +59,16 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	@ResponseBody
-	public Object showDetail(int id) {
+	public String showDetail(int id, Model model) {
 		Article article = articleService.getArticleById(id);
 		
 		if(article == null) {
 			return "존재하지 않는 게시물입니다.";
 		}
 		
-		return article;
+		model.addAttribute("article", article);
+		
+		return "usr/article/detail";
 	}
 	
 	
