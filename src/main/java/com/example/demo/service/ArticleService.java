@@ -1,26 +1,20 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.Article;
+import com.example.demo.repository.ArticleRepository;
 
 @Service
 public class ArticleService {
-
-	private List<Article> articles;
-	private int lastId;
+	private ArticleRepository articleRepository;
 	
-	public ArticleService() {
-		articles = new ArrayList<>();
-		lastId = 0;
-		
+	public ArticleService(ArticleRepository articleRepository) {
+		this.articleRepository = articleRepository;
 		makeTestDate();
-	}
-	public List<Article> getArticles() {
-		return articles;
 	}
 	
 	private void makeTestDate() {
@@ -29,29 +23,23 @@ public class ArticleService {
 		}
 	}
 	
-	public Article writeArticle(String title) {
-		int id = ++lastId;
-		Article article = new Article(id , title);
-		articles.add(article);
-		lastId = id;
+	public List<Article> getArticles() {
+		return articleRepository.getArticles();
+	}
 		
-		return article;
+	public Article writeArticle(String title) {		
+		return articleRepository.writeArticle(title);
 	}
 	
 	public void deleteArticle(Article article) {
-		articles.remove(article);
+		articleRepository.deleteArticle(article);
 	}
 	
 	public void modiftArticle(Article article, String title) {
-		article.setTitle(title);
+		articleRepository.modiftArticle(article, title);
 	}
 		
 	public Article getArticleById(int id) {
-		for (Article article : articles) {
-			if (article.getId() == id) {
-				return article;
-			}
-		}
-		return null;
+		return articleRepository.getArticleById(id);
 	}
 }
