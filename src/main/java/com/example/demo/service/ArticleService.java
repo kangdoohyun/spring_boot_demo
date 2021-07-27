@@ -28,8 +28,8 @@ public class ArticleService {
 		articleRepository.deleteArticle(article);
 	}
 	
-	public void modiftArticle(int id, String title, String body) {
-		articleRepository.modiftArticle(id, title, body);
+	public void modifyArticle(int id, String title, String body) {
+		articleRepository.modifyArticle(id, title, body);
 	}
 	
 	public Article getArticleById(int id) {

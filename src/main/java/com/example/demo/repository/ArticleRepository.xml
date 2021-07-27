@@ -27,11 +27,17 @@
 		DELETE FROM article 
 		WHERE id = #{id}
 	</delete>
-	<update id="modiftArticle">
-		UPDATE article 
-		SET updateDate = NOW(), 
-		title = #{title}, 
-		`body` = #{body} 
+	<update id="modifyArticle">
+		UPDATE article
+		<set>
+			updateDate = NOW(),
+			<if test="title != null and title != ''">
+				title = #{title},
+			</if>
+			<if test="body != null and body != ''">
+				`body` = #{body}
+			</if>
+		</set>
 		WHERE id = #{id}
 	</update>
 </mapper>

@@ -15,7 +15,7 @@ public interface ArticleRepository {
 	
 	public void deleteArticle(Article article);
 	
-	public void modiftArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
+	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
 	
 	public Article getArticleById(@Param("id") int id);
 

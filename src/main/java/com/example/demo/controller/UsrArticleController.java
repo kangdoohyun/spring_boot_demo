@@ -53,7 +53,7 @@ public class UsrArticleController {
 			return "존재하지 않는 게시물입니다.";
 		}
 		
-		articleService.modiftArticle(id, title, body);
+		articleService.modifyArticle(id, title, body);
 		
 		return id + "번 게시물이 수정되었습니다.";
 	}
