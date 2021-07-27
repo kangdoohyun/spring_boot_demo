@@ -1,5 +1,10 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.Article;
 import com.example.demo.service.ArticleService;
+import com.example.demo.util.ScriptUtil;
 
 @Controller
 public class UsrArticleController {
@@ -16,12 +22,18 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	
 	@RequestMapping("/usr/article/doWrite")
-	@ResponseBody
-	public Article doWrite(String title, String body) {
+	public void doWrite(String title, String body, HttpServletResponse response) {		
+		if(title == null || title.isEmpty()) {
+			ScriptUtil.alertAndHistoryBack(response, "제목을 입력해주세요.");
+		}
+		
+		if(body == null || body.isEmpty()) {
+			ScriptUtil.alertAndHistoryBack(response, "내용을 입력해주세요.");
+		}
+		
 		int id = articleService.writeArticle(title, body);
 		
-		Article article = articleService.getArticleById(id);
-		return article;
+		ScriptUtil.alertAndLocationReplace(response, "게시물을 작성하였습니다..", "./detail?id=" + id);
 	}
 	
 	@RequestMapping("/usr/article/list")
@@ -31,45 +43,54 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/doDelete")
-	@ResponseBody
-	public String doDelete(int id) {
+	public void doDelete(Integer id, HttpServletResponse response) {
+		if(id == null || id == 0) {
+			ScriptUtil.alertAndHistoryBack(response, "번호를 입력해주세요.");
+		}
+		
 		Article article = articleService.getArticleById(id);
 		
 		if(article == null) {
-			return "존재하지 않는 게시물입니다.";
+			ScriptUtil.alertAndHistoryBack(response, "존재하지 않는 게시물입니다.");
 		}
 		
 		articleService.deleteArticle(article);
 		
-		return id +  "번 게시물을 삭제하였습니다.";
+		ScriptUtil.alertAndLocationReplace(response, id + "번 게시물을 삭제하였습니다.", "./list");
 	}
 
 	@RequestMapping(value = "/usr/article/doModify", method = RequestMethod.GET)
-	@ResponseBody
-	public String doModify(int id, String title, String body) {
+	public void doModify(Integer id, String title, String body, HttpServletResponse response) {
+		if(id == null || id == 0) {
+			ScriptUtil.alertAndHistoryBack(response, "번호를 입력해주세요.");
+		}
+		
 		Article article = articleService.getArticleById(id);
 
 		if(article == null) {
-			return "존재하지 않는 게시물입니다.";
+			ScriptUtil.alertAndHistoryBack(response, "존재하지 않는 게시물입니다.");
 		}
 		
 		articleService.modifyArticle(id, title, body);
 		
-		return id + "번 게시물이 수정되었습니다.";
+		ScriptUtil.alertAndLocationReplace(response, id + "번 게시물이 수정되었습니다.", "./detail?id=" + id);
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(int id, Model model) {
+	public String showDetail(Integer id, Model model, HttpServletResponse response) {
+		if(id == null || id == 0) {
+			ScriptUtil.alertAndHistoryBack(response, "번호를 입력해주세요.");
+		}
+		
 		Article article = articleService.getArticleById(id);
 		
 		if(article == null) {
-			return "존재하지 않는 게시물입니다.";
+			ScriptUtil.alertAndHistoryBack(response, "존재하지 않는 게시물입니다.");
 		}
 		
 		model.addAttribute("article", article);
 		
 		return "usr/article/detail";
 	}
-	
 	
 }

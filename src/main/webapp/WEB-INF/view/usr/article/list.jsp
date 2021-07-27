@@ -8,6 +8,10 @@
 </head>
 <body>
   <div>
+    <h2>게시물 리스트</h2>
+    <hr>
+  </div>
+  <section>
     <c:forEach var="article" items="${articles}">
       <div>
         <span>번호 : ${article.id}</span>
@@ -20,6 +24,6 @@
       </div>
       <hr>
     </c:forEach>
-  </div>
+  </section>
 </body>
 </html>
