@@ -17,9 +17,10 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public Article doAdd(String title) {
-		Article article = articleService.writeArticle(title);
+	public Article doAdd(String title, String body) {
+		int id = articleService.writeArticle(title, body);
 		
+		Article article = articleService.getArticleById(id);
 		return article;
 	}
 	
@@ -45,14 +46,14 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(int id, String title) {
+	public String doModify(int id, String title, String body) {
 		Article article = articleService.getArticleById(id);
 
 		if(article == null) {
 			return "존재하지 않는 게시물입니다.";
 		}
 		
-		articleService.modiftArticle(article, title);
+		articleService.modiftArticle(id, title, body);
 		
 		return id + "번 게시물이 수정되었습니다.";
 	}

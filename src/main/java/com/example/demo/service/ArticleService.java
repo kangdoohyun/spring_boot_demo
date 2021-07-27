@@ -17,16 +17,19 @@ public class ArticleService {
 		return articleRepository.getArticles();
 	}
 		
-	public Article writeArticle(String title) {		
-		return articleRepository.writeArticle(title);
+	public int writeArticle(String title, String body) {		
+		articleRepository.writeArticle(title, body);
+		int id = articleRepository.getLastInsertId();
+		
+		return id;
 	}
 	
 	public void deleteArticle(Article article) {
 		articleRepository.deleteArticle(article);
 	}
 	
-	public void modiftArticle(Article article, String title) {
-		articleRepository.modiftArticle(article, title);
+	public void modiftArticle(int id, String title, String body) {
+		articleRepository.modiftArticle(id, title, body);
 	}
 	
 	public Article getArticleById(int id) {
