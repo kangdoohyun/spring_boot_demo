@@ -5,17 +5,27 @@
 
 <%@ include file="../part/head.jspf"%>
 
-<section class="container mx-auto">
-  <span>번호 : ${article.id}</span>
-  <br>
-  <span>작성 날짜 : ${article.regDate}</span>
-  <br>
-  <span>수정 날짜 : ${article.updateDate}</span>
-  <br>
-  <span>제목 : ${article.title}</span>
-  <br>
-  <span>내용 : ${article.body}</span>
-  <br>
+<section class="section section-detail container mx-auto">
+  <div class="section-top flex items-center justify-center font">
+    <span>${article.title} 상세페이지</span>
+  </div>
+  <div class="section-body">
+    <div class="detail-article py-2">
+      <div class="badge badge-outline badge-md font">번호</div>
+      <span> ${article.id}</span>
+      <br>
+      <div class="badge badge-outline badge-md font">작성 날짜</div>
+      <span> ${article.regDate}</span>
+      <br>
+      <div class="badge badge-outline badge-md font">수정 날짜</div>
+      <span> ${article.updateDate}</span>
+      <br>
+      <div class="badge badge-outline badge-md font">제목</div>
+      <span> ${article.title}</span>
+      <br>
+      <span>${article.body}</span>
+    </div>
+  </div>
 </section>
 
 <%@ include file="../part/foot.jspf"%>

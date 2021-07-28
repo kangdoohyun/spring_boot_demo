@@ -19,39 +19,55 @@
 <script charset="UTF-8" src="${pageContext.request.contextPath}/resource/common.js" defer="defer"></script>
 </head>
 <body>
-<div class="flex flex-col min-h-screen">
-  <header>
-    <div class="top-bar h-14 shadow">
-      <div class="h-full container mx-auto flex font items-center">
-        <a href="/" class="logo h-full flex items-center">
-          <span class="mr-1">
-            <i class="fas fa-leaf"></i>
-          </span>
-          <span>Spring Boot</span>
-        </a>
-        <div class="flex-grow"></div>
-        <nav class="top-bar__nav-box h-full flex items-center">
-          <ul class="h-full">
-            <li class="h-full">
-              <a class="side-bar-btn cursor-pointer h-full w-14 flex items-center justify-center">
-                <i class="fas fa-bars"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    <div class="side-bar">
-      <div class="side-bar__bg fixed inset-0"></div>
-      <div class="side-bar__content">
-        <div class="side-bar__head h-14 shadow flex">
-          <div class="flex-grow"></div>
-          <a class="side-bar__close-btn cursor-pointer h-full w-14 flex items-center justify-center">
-            <i class="fas fa-times"></i>
+  <div class="flex flex-col min-h-screen">
+    <header>
+      <div class="top-bar h-14 shadow fixed w-full">
+        <div class="h-full container mx-auto flex font items-center pl-4">
+          <a href="/" class="logo h-full flex items-center">
+            <span class="mr-1">
+              <i class="fas fa-leaf"></i>
+            </span>
+            <span>Spring Boot</span>
           </a>
+          <div class="flex-grow"></div>
+          <nav class="top-bar__nav-box h-full flex items-center">
+            <ul class="h-full flex">
+              <li class="h-full">
+                <a class="h-full flex items-center justify-center px-2" href="../article/list">
+                  <span class="mr-1">
+                    <i class="far fa-list-alt"></i>
+                  </span>
+                  <span>List</span>
+                </a>
+              </li>
+              <li class="h-full">
+                <a class="h-full flex items-center justify-center px-2" href="../article/write">
+                  <span class="mr-1">
+                    <i class="fas fa-pen"></i>
+                  </span>
+                  <span>Write</span>
+                </a>
+              </li>
+              <li class="h-full">
+                <a class="side-bar-btn cursor-pointer h-full w-14 flex items-center justify-center">
+                  <i class="fas fa-bars"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
-        <div class="side-bar__body"></div>
       </div>
-    </div>
-  </header>
-  <main class="flex-grow">
+      <div class="side-bar">
+        <div class="side-bar__bg fixed inset-0"></div>
+        <div class="side-bar__content">
+          <div class="side-bar__head h-14 shadow flex">
+            <div class="flex-grow"></div>
+            <a class="side-bar__close-btn cursor-pointer h-full w-14 flex items-center justify-center">
+              <i class="fas fa-times"></i>
+            </a>
+          </div>
+          <div class="side-bar__body"></div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow pt-14">

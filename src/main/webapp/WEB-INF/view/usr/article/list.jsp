@@ -4,20 +4,31 @@
 <c:set var="pageTitle" value="게시물 리스트" />
 
 <%@ include file="../part/head.jspf"%>
-<section class="container mx-auto">
-  <div class="list-article">
-    <c:forEach var="article" items="${articles}">
-      <div>
-        <span>번호 : ${article.id}</span>
-        <br>
-        <span>작성 날짜 : ${article.regDate}</span>
-        <br>
-        <span>수정 날짜 : ${article.updateDate}</span>
-        <br>
-        <a href="./detail?id=${article.id}">제목 : ${article.title}</a>
-        <hr>
-      </div>
-    </c:forEach>
+<section class="section section-list container mx-auto">
+  <div class="section-top flex items-center justify-center font">
+    <span>게시물 리스트</span>
+  </div>
+  <div class="section-body">
+    <div class="list-article">
+      <c:forEach var="article" items="${articles}">
+        <div class="py-2">
+          <div class="badge badge-outline badge-md font">번호</div>
+          <span> ${article.id}</span>
+          <br>
+          <div class="badge badge-outline badge-md font">작성 날짜</div>
+          <span> ${article.regDate}</span>
+          <br>
+          <div class="badge badge-outline badge-md font">수정 날짜</div>
+          <span> ${article.updateDate}</span>
+          <br>
+          <div class="badge badge-outline badge-md font">제목</div>
+          <a href="./detail?id=${article.id}"> ${article.title}</a>
+        </div>
+        <div>
+          <hr>
+        </div>
+      </c:forEach>
+    </div>
   </div>
 </section>
 <%@ include file="../part/foot.jspf"%>

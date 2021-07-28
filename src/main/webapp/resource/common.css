@@ -4,19 +4,45 @@
 	--tw-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1),0 -1px 2px 0 rgba(0, 0, 0, 0.06);
     box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);;
 }
+.badge-outline {
+    background-color: transparent;
+    border-color: #20435C;
+    --tw-border-opacity: 0.5;
+    --tw-text-opacity: 1;
+    color: #20435C;
+}
+.btn-link {
+    background-color: transparent;
+    border-color: transparent;
+    --tw-text-opacity: 1;
+    color: #20435C;
+}
 /* 라이브러리 끝 */
 
 /* 커스텀 시작 */
+body{
+	background-color: #F2F2F2;
+	color: #4E5966;
+}
+.top-bar{
+	background-color: #F2FDFF;	
+}
+.botton-bar{
+	background-color: #F2FDFF ;	
+}
 .side-bar__bg{
 	background-color: rgba(0, 0, 0, 0.5);
 }
 .side-bar__content{
-	background-color: #fff;
+	background-color: #F2F2F2;
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	right: 0;
 	left: 50%;
+}
+.side-bar__head{
+	background-color: #F2FDFF;	
 }
 .side-bar{
 	visibility: hidden;
@@ -35,7 +61,23 @@
 	transform: transLateX(0);
 	transition: transform .3s;
 }
-.list-article > div:last-child > hr{
+.list-article > div:last-child{
 	display: none;
+}
+.section {
+	border-radius: 20px;
+}
+.section-top{
+	border-radius: 20px 20px 0 0;
+	height: 56px;
+	background-color: #4E5966;
+	padding: 0 16px;
+	color: #fff;
+	font-size: 1.25rem;
+}
+.section-body{
+	background-color: #fff;
+	border-radius: 0 0 20px 20px;
+	padding: 0 16px;
 }
 /* 커스텀 끝 */
