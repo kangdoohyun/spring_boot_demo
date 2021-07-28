@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-  <div>
-    <h2>게시물 리스트</h2>
-    <hr>
-  </div>
-  <section>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="pageTitle" value="게시물 리스트" />
+
+<%@ include file="../part/head.jspf"%>
+<section class="container mx-auto">
+  <div class="list-article">
     <c:forEach var="article" items="${articles}">
       <div>
         <span>번호 : ${article.id}</span>
@@ -21,9 +15,9 @@
         <span>수정 날짜 : ${article.updateDate}</span>
         <br>
         <a href="./detail?id=${article.id}">제목 : ${article.title}</a>
+        <hr>
       </div>
-      <hr>
     </c:forEach>
-  </section>
-</body>
-</html>
+  </div>
+</section>
+<%@ include file="../part/foot.jspf"%>

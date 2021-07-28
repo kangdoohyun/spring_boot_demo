@@ -1,0 +1,41 @@
+@charset "UTF-8";
+/* 라이브러리 시작 */
+.shadow-top {
+	--tw-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1),0 -1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);;
+}
+/* 라이브러리 끝 */
+
+/* 커스텀 시작 */
+.side-bar__bg{
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.side-bar__content{
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 50%;
+}
+.side-bar{
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility .3s, opacity .3s; 
+}
+.side-bar.active{
+	visibility: visible;
+	opacity: 1;
+}
+.side-bar .side-bar__content{
+	transform: translateX(100%);
+	transition: transform .3s;
+}
+.side-bar.active .side-bar__content{
+	transform: transLateX(0);
+	transition: transform .3s;
+}
+.list-article > div:last-child > hr{
+	display: none;
+}
+/* 커스텀 끝 */
