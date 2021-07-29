@@ -5,7 +5,7 @@
 
 <%@ include file="../part/head.jspf"%>
 <section class="section section-list container mx-auto shadow">
-  <div class="section-top flex justify-center font h-full border-b-2 mt-2">
+  <div class="section-top flex justify-center font h-full mt-2">
     <span class="h-full flex justify-center items-center"><i class="far fa-list-alt"></i></span>
     <span class="h-full flex-grow flex justify-center items-center">게시물 리스트</span>
     <span class="w-5"></span>

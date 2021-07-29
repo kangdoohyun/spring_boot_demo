@@ -11,33 +11,33 @@ public class ScriptUtil {
 		response.setCharacterEncoding("UTF-8");
 	}
 
-	public static void alert(HttpServletResponse response, String alertText) {
+	public static void alert(HttpServletResponse response, String text) {
 		init(response);
 		try {
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('" + alertText + "');</script> ");
+			out.println("<script>alert('" + text + "');</script> ");
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void alertAndLocationReplace(HttpServletResponse response, String alertText, String nextPage) {
+	public static void locationReplace(HttpServletResponse response, String text, String replace) {
 		init(response);
 		try {
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('" + alertText + "'); location.href='" + nextPage + "';</script> ");
+			out.println("<script>alert('" + text + "'); location.href='" + replace + "';</script> ");
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void alertAndHistoryBack(HttpServletResponse response, String alertText) {
+	public static void historyBack(HttpServletResponse response, String text) {
 		init(response);
 		try {
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('" + alertText + "'); history.back();</script>");
+			out.println("<script>alert('" + text + "'); history.back();</script>");
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();

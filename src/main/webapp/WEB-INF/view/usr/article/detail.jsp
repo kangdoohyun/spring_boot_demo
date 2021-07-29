@@ -6,7 +6,7 @@
 <%@ include file="../part/head.jspf"%>
 
 <section class="section section-detail container mx-auto shadow">
-  <div class="section-top flex justify-center font h-full border-b-2 mt-2">
+  <div class="section-top flex justify-center font h-full mt-2">
     <span class="h-full flex justify-center items-center"><i class="far fa-window-maximize"></i></span>
     <span class="h-full flex-grow flex justify-center items-center">${article.title} 상세페이지</span>
     <span class="w-5"></span>
@@ -26,6 +26,13 @@
       <span> ${article.title}</span>
       <br>
       <span>${article.body}</span>
+    </div>
+    <div>
+      <form action="./doDelete" method="post">
+        <a href="./modify?id=${article.id}&title=${article.title}&body=${article.body}" class="btn btn-link">수정</a>
+        <input type="hidden" name="id" value="${article.id}"/>        
+        <button class="btn btn-link">삭제</button>
+      </form>
     </div>
   </div>
 </section>
