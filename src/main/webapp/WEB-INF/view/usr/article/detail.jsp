@@ -28,11 +28,18 @@
       <span>${article.body}</span>
     </div>
     <div>
-      <form action="./doDelete" method="post">
-        <a href="./modify?id=${article.id}&title=${article.title}&body=${article.body}" class="btn btn-link">수정</a>
-        <input type="hidden" name="id" value="${article.id}"/>        
-        <button class="btn btn-link">삭제</button>
-      </form>
+      <div class="form-box flex">
+        <form action="./modify" method="post">
+          <input type="hidden" name="id" value="${article.id}" />
+          <input type="hidden" name="title" value="${article.title}" />
+          <input type="hidden" name="body" value="${article.body}" />
+          <button class="btn btn-link" >수정</button>
+        </form>
+        <form action="./doDelete" method="post">
+          <input type="hidden" name="id" value="${article.id}"/>        
+          <button class="btn btn-link" onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;">삭제</button>
+        </form>
+      </div>
     </div>
   </div>
 </section>

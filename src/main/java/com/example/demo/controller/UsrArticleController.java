@@ -67,7 +67,7 @@ public class UsrArticleController {
 		ScriptUtil.locationReplace(response, id + "번 게시물을 삭제하였습니다.", "./list");
 	}
 
-	@RequestMapping(value = "/usr/article/modify", method = RequestMethod.GET)
+	@RequestMapping(value = "/usr/article/modify", method = RequestMethod.POST)
 	public String showModify(Integer id, String title, String body, HttpServletResponse response, RedirectAttributes redirect) {
 		if (id == null || id == 0) {
 			ScriptUtil.historyBack(response, "번호를 입력해주세요.");
