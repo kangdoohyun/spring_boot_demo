@@ -13,7 +13,7 @@
   </div>
   <div class="section-body mb-2">
     <div class="write-article py-2">
-      <form action="./doWrite">
+      <form action="./doWrite" method="POST">
         <div class="form-control">
           <label class="label">
             <span class="label-text">제목</span>
