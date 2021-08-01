@@ -49,6 +49,14 @@
                 </a>
               </li>
               <li class="h-full">
+                <a class="h-full flex items-center justify-center px-2" href="../member/login">
+                  <span class="mr-1">
+                    <i class="fas fa-sign-in-alt"></i>
+                  </span>
+                  <span>Login</span>
+                </a>
+              </li>
+              <li class="h-full">
                 <a class="side-bar-btn cursor-pointer h-full w-14 flex items-center justify-center">
                   <i class="fas fa-bars"></i>
                 </a>
