@@ -23,13 +23,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/usr/home/main", "/resource/**", "/usr/member/doLogin", "/usr/article/list", "/usr/member/join", "/usr/member/doJoin", "/usr/member/doLogout", "/**").permitAll()
-//				.antMatchers("/", "/resource/**").permitAll()
-				.antMatchers("/**").hasRole("ADMIN")
+				.antMatchers("/", "/usr/home/main", "/resource/**", "/usr/member/doLogin", "/usr/member/join", "/usr/member/doJoin", "/usr/member/doLogout", "/**").permitAll()
+				.antMatchers("/adm/**").hasRole("ADMIN")
+				.antMatchers("/usr/**").hasRole("USER")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/usr/member/login")
+//				.loginPage("/usr/member/login")
 				.permitAll()
 				.and()
 			.logout()
