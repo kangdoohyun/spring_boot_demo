@@ -23,7 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/usr/home/main", "/resource/**", "/usr/member/doLogin", "/usr/article/list", "/usr/member/join", "/usr/member/doJoin").permitAll()
+				.antMatchers("/", "/usr/home/main", "/resource/**", "/usr/member/doLogin", "/usr/article/list", "/usr/member/join", "/usr/member/doJoin", "/usr/member/doLogout", "/**").permitAll()
+//				.antMatchers("/", "/resource/**").permitAll()
+				.antMatchers("/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -44,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        + "from `member` "
 	        + "where loginId = ?")
 	      .authoritiesByUsernameQuery("select m.loginId, r.name "
-	        + "from member_role mr inner join member m on mr.member_id = m.id "
+	        + "from member_role mr inner join member m on mr.memberId = m.id "
 	        + "inner join role r on mr.roleId = r.id "
 	        + "where m.loginId = ?");
 	}

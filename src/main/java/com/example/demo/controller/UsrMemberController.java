@@ -4,11 +4,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.dto.Member;
+import com.example.demo.service.MemberRoleService;
 import com.example.demo.service.MemberService;
 import com.example.demo.util.ScriptUtil;
 
@@ -17,6 +19,12 @@ import com.example.demo.util.ScriptUtil;
 public class UsrMemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MemberRoleService memberRoleService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@GetMapping("/login")
 	public String showLogin() {
@@ -45,16 +53,29 @@ public class UsrMemberController {
 			return;
 		}
 		
-		if(!member.getLoginPw().equals(loginPw)) {
+		if(passwordEncoder.matches(member.getLoginPw(), loginPw)) {
 			ScriptUtil.historyBack(response, "비밀번호를 확인해주세요.");
 			return;
 		}
 		
+		session.setAttribute("nickname", member.getNickname());
+		
 		ScriptUtil.locationReplace(response, "환영합니다.", "/usr/article/list");
 	}
 	
+	@GetMapping("/doLogout")
+	public void doLogout(String loginId, String loginPw, HttpServletResponse response, HttpSession session) {
+		if(session.getAttribute("nickname") != null) {
+			session.removeAttribute("nickname");
+			ScriptUtil.locationReplace(response, "로그아웃 되었습니다.", "/usr/article/list");
+			return;
+		}
+		
+		ScriptUtil.historyBack(response, "로그인상태가 아닙니다.");
+	}
+	
 	@GetMapping("/doJoin")
-	public void doJoin(String loginId, String loginPw, String name, String nickname, String email, String cellphoneNo, HttpServletResponse response, HttpSession session) {
+	public void doJoin(String loginId, String loginPw, String name, String nickname, String email, String cellphoneNo, HttpServletResponse response) {
 		if(loginId == null || loginId.isEmpty()) {
 			ScriptUtil.historyBack(response, "아이디를 입력해주세요.");
 			return;
@@ -100,8 +121,12 @@ public class UsrMemberController {
 			ScriptUtil.historyBack(response, "사용할 수 없는 이메일입니다.");
 			return;
 		}
+
+		boolean enabled = true;
+		String role = "ROLE_USER";
 		
-		memberService.joinMember(loginId, loginPw, name, nickname, email, cellphoneNo);
+		int id = memberService.joinMember(loginId, loginPw, name, nickname, email, cellphoneNo, enabled, role);
+		memberRoleService.setAuthority(id, 1);
 		
 		ScriptUtil.locationReplace(response, "회원가입에 성공했습니다. 로그인 페이지로 이동합니다.", "usr/member/login");
 	}

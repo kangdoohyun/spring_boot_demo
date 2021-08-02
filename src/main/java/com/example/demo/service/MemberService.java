@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.Member;
@@ -10,6 +11,9 @@ import com.example.demo.repository.MemberRepository;
 public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public Member getMemberByLoginId(String loginId) {
 		return memberRepository.getMemberByLoginId(loginId);
@@ -47,8 +51,12 @@ public class MemberService {
 		return true;
 	}
 
-	public void joinMember(String loginId, String loginPw, String name, String nickname, String email,
-			String cellphoneNo) {
-		memberRepository.joinMember(loginId, loginPw, name, nickname, email, cellphoneNo);
+	public int joinMember(String loginId, String loginPw, String name, String nickname, String email,
+			String cellphoneNo, boolean enabled, String role) {
+		String encodedLoginPw = passwordEncoder.encode(loginPw);
+		memberRepository.joinMember(loginId, encodedLoginPw, name, nickname, email, cellphoneNo, enabled, role);
+		int id = memberRepository.getLastInsertId();
+		
+		return id; 
 	}
 }

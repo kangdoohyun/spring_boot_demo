@@ -23,7 +23,10 @@
 		nickname = #{nickname},
 		email = #{email},
 		cellphoneNo = #{cellphoneNo},
-		authority = "사용자",
-		enabled = TRUE
+		authority = #{role},
+		enabled = #{enabled}
 	</insert>
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
 </mapper>
